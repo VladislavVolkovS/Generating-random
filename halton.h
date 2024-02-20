@@ -3,6 +3,6 @@
 #include "primes.h"
 #include "scramble.h"
 
-double halton(int index, int base);
+float halton(int index, int base);
 
-double halton_scramble(int index, int base);
+float halton_scramble(int index, int base);
