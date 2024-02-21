@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import os.path
 
-def plot_halton():
+def plot():
     name_csv = "sample_result.csv"
     csv = pd.read_csv(name_csv, delimiter=',')
     X_values = csv["x"]
@@ -39,7 +39,7 @@ execute_process = subprocess.Popen(execution_command, shell=True, stdout=subproc
 execute_output, execute_error = execute_process.communicate()
 
 if execute_process.returncode == 0:
-    plot_halton()
+    plot()
 else:
     print('Произошла ошибка при выполнении программы:')
     print(execute_error.decode())
