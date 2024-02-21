@@ -43,14 +43,29 @@
 int main(int argc, const char* argv[]) {
     auto params = ReadParams(argc, argv);
 
+    std::ofstream pixel;
+    std::string pixel_txt = "pix_num.txt";
+    pixel.open(pixel_txt);
+    pixel.clear();
+    pixel << params.linearPixelIndex;
+    pixel.close();
+
+    std::ofstream csv;
+    std::string csv_name = "sample_result.csv";
+    csv.open(csv_name);
+    csv.clear();
+    csv << "x,y,\n";
+
     for (int i = 0; i < params.samples_per_pixel; ++i) {
         auto state = initSampler(params.linearPixelIndex, i, 0);
 
         float x = random(state, params.dim[0], params.gen_type, params.scrambling);
         float y = random(state, params.dim[1], params.gen_type, params.scrambling);
 
-        std::cout << x << " " << y << "\n";
+        csv << x << "," << y << ",\n";
     }
+
+    csv.close();
 
     return 0;
 }
