@@ -44,10 +44,25 @@ int main(int argc, const char* argv[]) {
     auto params = ReadParams(argc, argv);
 
     std::ofstream pixel;
-    std::string pixel_txt = "pix_num.txt";
-    pixel.open(pixel_txt);
+    std::string params_txt = "params.txt";
+    std::string name_gen;
+    switch (params.gen_type) {
+        case 0:
+            name_gen = "STL";
+            break;
+        case 1:
+            name_gen = "HALTON";
+            break;
+        case 2:
+            name_gen = "SOBOL";
+            break;
+        default:
+            break;
+    }
+    pixel.open(params_txt);
     pixel.clear();
-    pixel << params.linearPixelIndex;
+    pixel << name_gen + " " << params.linearPixelIndex << " " << params.samples_per_pixel << " " <<
+             static_cast<uint32_t>(params.dim[0]) << " " << static_cast<uint32_t>(params.dim[1]);
     pixel.close();
 
     std::ofstream csv;
