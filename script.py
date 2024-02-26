@@ -22,8 +22,9 @@ def plot():
     plt.savefig("result_dim" + params[3] + "-" + params[4] + "_spp" + params[2] + "_pix" + \
                  params[1] + ".png")
 
+
 if not os.path.exists("sampler-generators"):
-    program = "g++ -o sampler-generators main.cpp halton.cpp sobol.cpp scramble.cpp random.cpp sampler.cpp"
+    program = "g++ -std=c++17 -o sampler-generators main.cpp halton.cpp sobol.cpp scramble.cpp random.cpp sampler.cpp"
 
     process = subprocess.Popen(program, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
@@ -48,9 +49,10 @@ if not os.path.exists("sampler-generators"):
     "scramble", "scrambling"
 """
 
-args = ['--gen_type 1', '--spp 16', '--pixelX 100', '--pixelY 100', '--dimX 7', '--dimY 8']
+args = ['--gen_type 1', '--spp 256', '--pixelX 100', '--pixelY 100', '--dimX 9', '--dimY 10']
 
 execution_command = "./sampler-generators " + " ".join(str(arg) for arg in args)
+
 execute_process = subprocess.Popen(execution_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 execute_output, execute_error = execute_process.communicate()
 
