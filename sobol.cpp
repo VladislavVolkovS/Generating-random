@@ -65,7 +65,7 @@ uint32_t sobol4d(uint32_t index, uint32_t dim) {
     uint32_t result = 0;
     for (int bit = 0; bit < 32; bit++) {
         int mask = (index >> bit) & 1;
-       result ^= mask * matrices[(dim % 4) * bit];
+        result ^= mask * matrices[(dim % 4) * bit];
     }
     return result;
 }
