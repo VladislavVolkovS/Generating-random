@@ -21,34 +21,18 @@ uint32_t ReverseBitsOwen(uint32_t value, uint32_t seed) {
     return value;
 }
 
-uint32_t laine_karras_permutation(uint32_t x, uint32_t seed) {
-    x += seed;
-    x ^= x * 0x6c50b47cu;
-    x ^= x * 0xb82f1e52u;
-    x ^= x * 0xc7afe638u;
-    x ^= x * 0x8d22f6e6u;
-    return x;
-}
-
-uint32_t nested_uniform_scramble(uint32_t x, uint32_t seed) {
-    x = ReverseBits(x);
-    x = laine_karras_permutation(x, seed);
-    x = ReverseBits(x);
-    return x;
-}
-
-uint32_t fast_owen_scramble(uint32_t seed, uint32_t value) {
-    value = ReverseBits(value);
-
-    value ^= value * 0x3d20adea;
-    value ^= (value >> 1) & (value << 1) & 0x55555555;
+uint32_t laine_karras_permutation(uint32_t value, uint32_t seed) {
     value += seed;
-    value *= (seed >> 16) | 1;
-    value ^= (value >> 1) & (value << 1) & 0x55555555;
-    value ^= value * 0x05526c56;
-    value ^= value * 0x53a22864;
+    value ^= value * 0x6c50b47cu;
+    value ^= value * 0xb82f1e52u;
+    value ^= value * 0xc7afe638u;
+    value ^= value * 0x8d22f6e6u;
+    return value;
+}
 
+uint32_t nested_uniform_scramble(uint32_t value, uint32_t seed) {
     value = ReverseBits(value);
-
+    value = laine_karras_permutation(value, seed);
+    value = ReverseBits(value);
     return value;
 }

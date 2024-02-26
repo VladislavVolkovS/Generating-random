@@ -52,6 +52,7 @@ if not os.path.exists("sampler-generators"):
 args = ['--gen_type 2', '--spp 256', '--pixelX 10', '--pixelY 10', '--dimX 0', '--dimY 1', '--scramble 1']
 
 execution_command = "./sampler-generators " + " ".join(str(arg) for arg in args)
+print(execution_command)
 
 execute_process = subprocess.Popen(execution_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 execute_output, execute_error = execute_process.communicate()

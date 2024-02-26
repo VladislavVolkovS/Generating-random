@@ -29,7 +29,7 @@ float random(SamplerState& state, const SampleDimension dim, Generator gen_type,
         return scrambling ? halton_scramble(state.seed + state.sampleIdx, base)
                           : halton(state.seed + state.sampleIdx, base);
     } else if (gen_type == SOBOL) {
-        return scrambling ? sobol_scramble(state.seed + state.sampleIdx, base, state.seed)
+        return scrambling ? sobol_scramble_shuffled(state.seed + state.sampleIdx, base, state.seed)
                           : sobol(state.seed + state.sampleIdx, base);
     } else {
         return GetRandomFromStd();

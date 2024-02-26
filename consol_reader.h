@@ -30,7 +30,7 @@ Parameters ReadParams(int argc, const char* argv[]) {
 
         ("gen_type", "type of random generator", cxxopts::value<uint32_t>()->default_value("0"))
 
-        ("scramble", "scrambling", cxxopts::value<bool>()->default_value("0"))
+        ("scramble", "scrambling", cxxopts::value<uint32_t>()->default_value("0"))
     ;
 
     auto result = options.parse(argc, argv);
@@ -48,13 +48,18 @@ Parameters ReadParams(int argc, const char* argv[]) {
 
     auto gen_type = static_cast<Generator>(result["gen_type"].as<uint32_t>());
 
-    auto scramble = result["scramble"].as<bool>();
+    auto scramble = result["scramble"].as<uint32_t>();
+
+    bool scrambling = false;
+    if (scramble > 0) {
+        scrambling = true;
+    }
 
     return Parameters{
         {dimX, dimY},
         pixelY * screenWidth + pixelX,
         spp,
         gen_type,
-        scramble
+        scrambling
     };
 }

@@ -8,3 +8,5 @@
 float sobol(uint32_t index, uint32_t base);
 
 float sobol_scramble(uint32_t index, uint32_t base, uint32_t seed);
+
+float sobol_scramble_shuffled(uint32_t index, uint32_t base, uint32_t seed);
