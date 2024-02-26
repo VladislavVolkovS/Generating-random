@@ -72,7 +72,7 @@ int main(int argc, const char* argv[]) {
     csv << "x,y,\n";
 
     for (int i = 0; i < params.samples_per_pixel; ++i) {
-        auto state = initSampler(params.linearPixelIndex, i, 0);
+        auto state = initSampler(params.linearPixelIndex, i);
 
         float x = random(state, params.dim[0], params.gen_type, params.scrambling);
         float y = random(state, params.dim[1], params.gen_type, params.scrambling);

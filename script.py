@@ -49,7 +49,7 @@ if not os.path.exists("sampler-generators"):
     "scramble", "scrambling"
 """
 
-args = ['--gen_type 1', '--spp 256', '--pixelX 100', '--pixelY 100', '--dimX 9', '--dimY 10']
+args = ['--gen_type 2', '--spp 256', '--pixelX 10', '--pixelY 10', '--dimX 0', '--dimY 1', '--scramble 1']
 
 execution_command = "./sampler-generators " + " ".join(str(arg) for arg in args)
 
