@@ -1,5 +1,19 @@
 #include "scramble.h"
 
+uint32_t hash_combine(uint32_t seed, uint32_t v) {
+  return seed ^ (v + (seed << 6) + (seed >> 2));
+}
+
+uint32_t hash(uint32_t x) {
+    // finalizer from murmurhash3
+    x ^= x >> 16;
+    x *= 0x85ebca6bu;
+    x ^= x >> 13;
+    x *= 0xc2b2ae35u;
+    x ^= x >> 16;
+    return x;
+}
+
 uint32_t ReverseBits(uint32_t value) {
 
     value = (((value & 0xaaaaaaaa) >> 1) | ((value & 0x55555555) << 1));

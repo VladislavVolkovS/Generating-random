@@ -1,7 +1,14 @@
+import sys
 import subprocess
 import matplotlib.pyplot as plt
 import pandas as pd
 import os.path
+
+# python3 script.py [256] [1] [0]
+# [256] - сэмплов на пиксель
+# [1] - количество дименшенов
+# [0] - скремблинг
+
 
 def plot():
     name_csv = "sample_result.csv"
@@ -36,29 +43,40 @@ if not os.path.exists("sampler-generators"):
     else:
         print("Программа скомпилирована")
 
-"""
-    Arguments:
-    "w, width", "screen width"
-    "h, height", "screen height"
-    "spp", "samples per pixel"
-    "pixelX", "pixel horizontal position"
-    "pixelY", "pixel vertical position"
-    "dimX", "dimension to output as x"
-    "dimY", "dimension to output as y"
-    "gen_type", "type of random generator"
-    "scramble", "scrambling"
-"""
+def run_random(args):
 
-args = ['--gen_type 2', '--spp 256', '--pixelX 10', '--pixelY 10', '--dimX 0', '--dimY 1', '--scramble 1']
+    execution_command = "./sampler-generators " + " ".join(str(arg) for arg in args)
 
-execution_command = "./sampler-generators " + " ".join(str(arg) for arg in args)
-print(execution_command)
+    execute_process = subprocess.Popen(execution_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    execute_output, execute_error = execute_process.communicate()
 
-execute_process = subprocess.Popen(execution_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-execute_output, execute_error = execute_process.communicate()
+    if execute_process.returncode == 0:
+        plot()
+    else:
+        print('Произошла ошибка при выполнении программы:')
+        print(execute_error.decode())
 
-if execute_process.returncode == 0:
-    plot()
+
+n = len(sys.argv)
+if n == 1:
+    """
+        Arguments:
+        "w, width", "screen width"
+        "h, height", "screen height"
+        "spp", "samples per pixel"
+        "pixelX", "pixel horizontal position"
+        "pixelY", "pixel vertical position"
+        "dimX", "dimension to output as x"
+        "dimY", "dimension to output as y"
+        "gen_type", "type of random generator"
+        "scramble", "scrambling"
+    """
+    args = ['--gen_type 2', '--spp 256', '--pixelX 0', '--pixelY 0', '--dimX 0', '--dimY 1', '--scramble 0']
+    run_random(args)
 else:
-    print('Произошла ошибка при выполнении программы:')
-    print(execute_error.decode())
+    spp = sys.argv[1] #сэмплы на пиксель
+    n_dimensions = sys.argv[2] # количество дименшенов
+    scramble = sys.argv[3] # скремблинг
+    for i in range(int(n_dimensions)):
+        args = ['--gen_type 2', '--spp ' + str(spp), '--pixelX 100', '--pixelY 100', '--dimX ' + str(i), '--dimY ' + str(i + 1), '--scramble ' + str(scramble)]
+        run_random(args)

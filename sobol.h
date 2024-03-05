@@ -2,11 +2,12 @@
 
 #include <iostream>
 #include <vector>
-#include "sbprimes.h"
 #include "scramble.h"
 
-float sobol(uint32_t index, uint32_t base);
+uint32_t sobol_uint(uint32_t index, uint32_t dim);
 
-float sobol_scramble(uint32_t index, uint32_t base, uint32_t seed);
+float sobol(uint32_t index, uint32_t dim);
 
-float sobol_scramble_shuffled(uint32_t index, uint32_t base, uint32_t seed);
+float sobol4d(uint32_t index, uint32_t dim, uint32_t seed);
+
+float sobol_scramble(uint32_t index, uint32_t dim, uint32_t seed);

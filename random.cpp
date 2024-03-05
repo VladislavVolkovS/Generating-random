@@ -24,13 +24,13 @@ float GetRandomFromStd() {
 
 float random(SamplerState& state, const SampleDimension dim, Generator gen_type, bool scrambling) {
     const uint32_t dimension = uint32_t(dim);
-    const uint32_t base = Primes[dimension & 31u];
     if (gen_type == HALTON) {
-        return scrambling ? halton_scramble(state.seed + state.sampleIdx, base)
-                          : halton(state.seed + state.sampleIdx, base);
+        const uint32_t base = Primes[dimension & 31u];
+        return scrambling ? halton_scramble(state.seed, base)
+                          : halton(state.seed, base);
     } else if (gen_type == SOBOL) {
-        return scrambling ? sobol_scramble_shuffled(state.seed + state.sampleIdx, base, state.seed)
-                          : sobol(state.seed + state.sampleIdx, base);
+        return scrambling ? sobol_scramble(state.sampleIdx, dimension, state.seed)
+                          : sobol(state.sampleIdx, dimension);
     } else {
         return GetRandomFromStd();
     }
