@@ -20,4 +20,5 @@ struct SamplerState {
     uint32_t sampleIdx;
 };
 
-SamplerState initSampler(uint32_t linearPixelIndex, uint32_t pixelSampleIndex, uint32_t seed = 0);
+SamplerState initSampler(uint32_t linearPixelIndex, uint32_t pixelSampleIndex, uint32_t seed = 0,
+                         uint32_t samplesPerPixel = 1);

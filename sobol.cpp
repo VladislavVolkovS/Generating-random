@@ -63,7 +63,8 @@ uint32_t sobol_uint(uint32_t index, uint32_t dim)
 
 float sobol(uint32_t index, uint32_t dim) {
 
-    return sobol_uint(index, dim) * float(1.0/(1ul<<32));
+    // 
+    return sobol_uint(index, dim) * float(1.0f/(float)UINT32_MAX);
 }
 
 float sobol_scramble(uint32_t index, uint32_t dim, uint32_t seed) {
@@ -75,5 +76,5 @@ float sobol_scramble(uint32_t index, uint32_t dim, uint32_t seed) {
 
     uint32_t result = nested_uniform_scramble(sobol_uint(index, dim), hash_combine(hash(seed), dim));
 
-    return result * float(1.0/(1ul<<32));
+    return result * float(1.0f/(float)UINT32_MAX);
 }
