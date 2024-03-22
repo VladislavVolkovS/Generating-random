@@ -77,6 +77,7 @@ else:
     spp = sys.argv[1] #сэмплы на пиксель
     n_dimensions = sys.argv[2] # количество дименшенов
     scramble = sys.argv[3] # скремблинг
+    gen_type = sys.argv[4]
     for i in range(int(n_dimensions)):
-        args = ['--gen_type 2', '--spp ' + str(spp), '--pixelX 11', '--pixelY 10', '--dimX ' + str(i), '--dimY ' + str(i + 1), '--scramble ' + str(scramble)]
+        args = ['--gen_type ' + str(gen_type), '--spp ' + str(spp), '--pixelX 11', '--pixelY 10', '--dimX ' + str(i), '--dimY ' + str(i + 1), '--scramble ' + str(scramble)]
         run_random(args)
