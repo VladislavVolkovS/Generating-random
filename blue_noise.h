@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include <random>
-#include <fstream>
 #include <optional>
 #include <array>
 #include <climits>
@@ -15,7 +14,7 @@ struct BlueNoiseData {
     std::vector<vec2> points;
     float width = 1.0f;
     float height = 1.0f;
-    float radius = 0.04f;
+    float radius = 0.02f;
     int32_t n_looked_points = 30; // default
     int32_t dimensions = 2; // default
 };
