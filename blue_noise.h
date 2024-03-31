@@ -17,6 +17,7 @@ struct BlueNoiseData {
     float radius = 0.02f;
     int32_t n_looked_points = 30; // default
     int32_t dimensions = 2; // default
+    std::random_device seed;
 };
 
 void SavePointToGrid(std::vector<std::optional<vec2>>& grid, float cell_size, int32_t grid_cols,

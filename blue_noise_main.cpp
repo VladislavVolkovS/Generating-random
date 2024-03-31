@@ -3,6 +3,8 @@
 
 int main() {
     BlueNoiseData data{};
+    data.radius = 0.05f;
+    data.n_looked_points = 100;
     BlueNoise(&data);
 
     std::ofstream file;

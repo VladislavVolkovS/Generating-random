@@ -6,7 +6,7 @@
 #include <random>
 
 enum Generator {
-    STL, HALTON, SOBOL
+    STL, HALTON, SOBOL, BLUE_NOISE
 };
 
 float GetRandomFromStd();

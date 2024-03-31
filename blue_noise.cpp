@@ -66,7 +66,7 @@ void BlueNoise(BlueNoiseData* data) {
 
     std::vector<vec2> active;
 
-    vec2 start_point{distrib(rng) * (data->width - 1.0f), distrib(rng) * (data->height - 1.0f)};
+    vec2 start_point{data->width / 2.0f, data->height / 2.0f};
 
     SavePointToGrid(grid, cell_size, grid_cols, grid_rows, start_point);
     active.push_back(start_point);

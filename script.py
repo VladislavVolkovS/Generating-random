@@ -31,7 +31,7 @@ def plot():
 
 
 if not os.path.exists("sampler-generators"):
-    program = "g++ -std=c++17 -o sampler-generators main.cpp halton.cpp sobol.cpp scramble.cpp random.cpp sampler.cpp"
+    program = "g++ -std=c++17 -o sampler-generators main.cpp halton.cpp sobol.cpp scramble.cpp random.cpp sampler.cpp blue_noise.cpp"
 
     process = subprocess.Popen(program, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
