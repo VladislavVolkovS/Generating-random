@@ -1,9 +1,7 @@
-#include "halton.h"
 #include <iostream>
 #include <fstream>
 #include "random.h"
 #include "consol_reader.h"
-#include "blue_noise.h"
 
 int main(int argc, const char* argv[]) {
     auto params = ReadParams(argc, argv);
@@ -37,24 +35,6 @@ int main(int argc, const char* argv[]) {
     csv.open(csv_name);
     csv.clear();
     csv << "x,y,\n";
-
-    BlueNoiseData data{};
-
-    // values for 256 points but distributions are equal
-    data.radius = 0.05005f;
-
-    if (name_gen == "BLUE_NOISE") {
-        BlueNoise(&data);
-        for (int i = 0; i < params.samples_per_pixel; ++i) {
-
-            float x = data.points[i % params.samples_per_pixel][0];
-            float y = data.points[i % params.samples_per_pixel][1];
-
-            csv << x << "," << y << ",\n";
-        }
-        csv.close();
-        return 0;
-    }
 
     for (int i = 0; i < params.samples_per_pixel; ++i) {
         auto state = initSampler(params.linearPixelIndex, i, 1, params.samples_per_pixel,

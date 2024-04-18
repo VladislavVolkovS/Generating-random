@@ -1,8 +1,9 @@
 #pragma once
 
 #include "sampler.h"
-#include "halton.h"
-#include "sobol.h"
+#include "halton/halton.h"
+#include "sobol/sobol.h"
+#include "blue_noise/mitchels_bn.h"
 #include <random>
 
 enum Generator {
