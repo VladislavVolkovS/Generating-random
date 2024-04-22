@@ -6,13 +6,13 @@ from matplotlib.animation import FuncAnimation
 import matplotlib.animation as animation
 import matplotlib.cm as cm
 
-csv = pd.read_csv("blue_noise_res.csv", delimiter=',', header=None)
+csv = pd.read_csv("mitchels_bn_64x64.csv", delimiter=',', header=None)
 a = np.array(csv)
 x = a.T[0]
 y = a.T[1]
 
 fig, ax = plt.subplots(figsize=(8, 8))
-plt.title("blue_noise_r=0.05")
+plt.title("mitchels_bn_64x64")
 plt.xlim(0, 1)
 plt.ylim(0, 1)
 plt.grid(True, color="grey", linewidth=1, alpha=0.1)
