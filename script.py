@@ -31,7 +31,16 @@ def plot():
 
 
 if not os.path.exists("sampler-generators"):
-    program = "g++ -std=c++17 -o sampler-generators main.cpp halton.cpp sobol.cpp scramble.cpp random.cpp sampler.cpp blue_noise.cpp"
+    program = "g++ -O2 -std=c++17 -o sampler-generators main.cpp"
+    program += " halton/halton.cpp"
+    program += " sobol/sobol.cpp"
+    program += " scrambling/scramble.cpp"
+    program += " random.cpp sampler.cpp"
+    # program += " blue_noise/bridson_bn.cpp"
+    # program += " blue_noise/mitchels_bn.cpp"
+    # program += " blue_noise/blue_noise_1D.cpp"
+    # program += " blue_noise/blue_noise_2D.cpp"
+    program += " uniform/uniform.cpp"
 
     process = subprocess.Popen(program, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
@@ -79,5 +88,5 @@ else:
     scramble = sys.argv[3] # скремблинг
     gen_type = sys.argv[4]
     for i in range(int(n_dimensions)):
-        args = ['--gen_type ' + str(gen_type), '--spp ' + str(spp), '--pixelX 11', '--pixelY 10', '--dimX ' + str(i), '--dimY ' + str(i + 1), '--scramble ' + str(scramble)]
+        args = ['--gen_type ' + str(gen_type), '--spp ' + str(spp), '--pixelX 0', '--pixelY 0', '--dimX ' + str(i), '--dimY ' + str(i + 1), '--scramble ' + str(scramble)]
         run_random(args)

@@ -7,14 +7,14 @@
 
 using Color = std::array<float, 3>;
 
-const int size = 64;
+const int size = 256;
 
 void SaveCSV(std::vector<std::vector<Color>>& mask, const std::string file_name) {
     std::ofstream file;
     file.open(file_name);
     for (const auto& vec : mask) {
         for (const auto& col : vec) {
-            file << col[0] << ", ";
+            file << col[0] << " ";
         }
         file << "\n";
     }
@@ -140,7 +140,7 @@ int main()
             }
         }
 
-        if (ite % 10'000 == 0) {
+        if (ite % 1'000 == 0) {
             std::cout << "Iteration: " << ite << ", " << "Energy: " << current_energy << '\r' << std::flush;
         }
 

@@ -66,8 +66,6 @@ float sobol(uint32_t index, uint32_t dim) {
 }
 
 float sobol_scramble(uint32_t index, uint32_t dim, uint32_t seed) {
-    seed += dim / 5;
-    dim = dim % 5;
 
     index = nested_uniform_scramble(index, hash(seed));
 

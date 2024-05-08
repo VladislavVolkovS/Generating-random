@@ -8,6 +8,8 @@
 struct Parameters {
     std::array<SampleDimension, 2> dim;
     uint32_t linearPixelIndex;
+    uint32_t pixelX, pixelY;
+    uint32_t width, height;
     uint32_t samples_per_pixel;
     Generator gen_type;
     bool scrambling;
@@ -58,6 +60,8 @@ Parameters ReadParams(int argc, const char* argv[]) {
     return Parameters{
         {dimX, dimY},
         pixelY * screenWidth + pixelX,
+        pixelX, pixelY,
+        screenWidth, screenHeight,
         spp,
         gen_type,
         scrambling

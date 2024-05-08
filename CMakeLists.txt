@@ -10,8 +10,11 @@ add_executable(
     sobol/sobol.cpp
     scrambling/scramble.cpp
     random.cpp sampler.cpp
-    blue_noise/bridson_bn.cpp
-    blue_noise/mitchels_bn.cpp
+    # blue_noise/bridson_bn.cpp
+    # blue_noise/mitchels_bn.cpp
+    # blue_noise/blue_noise_1D.cpp
+    # blue_noise/blue_noise_2D.cpp
+    uniform/uniform.cpp
 )
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

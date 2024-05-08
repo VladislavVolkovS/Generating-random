@@ -9,6 +9,7 @@ int main(int argc, const char* argv[]) {
     std::ofstream pixel;
     std::string params_txt = "params.txt";
     std::string name_gen;
+    // params.gen_type = UNIFORM;
     switch (params.gen_type) {
         case 0:
             name_gen = "STL";
@@ -21,6 +22,9 @@ int main(int argc, const char* argv[]) {
             break;
         case 3:
             name_gen = "BLUE_NOISE";
+        case 4:
+            name_gen = "UNIFORM";
+            break;
         default:
             break;
     }
@@ -36,12 +40,35 @@ int main(int argc, const char* argv[]) {
     csv.clear();
     csv << "x,y,\n";
 
-    for (int i = 0; i < params.samples_per_pixel; ++i) {
-        auto state = initSampler(params.linearPixelIndex, i, 1, params.samples_per_pixel,
-                                 (uint8_t)params.gen_type);
+    std::vector<float> blueNoiseData;
+    createBlueNoiseBuffer(blueNoiseData);
+    for (int i = 1; i <= params.samples_per_pixel; ++i) {
+        uint32_t seed = 42;
+        switch (params.gen_type)
+        {
+        case UNIFORM /* Uniform*/:
+            // seed = prd.sampleIndex + prd.linearPixelIndex * params.maxSampleCount;
+            seed = initRNG(params.pixelX, params.pixelY, params.width, i);
+            break;
+        case HALTON /* Halton */:
+            /* seed depends on pixel*/
+            seed = jenkins_hash(params.linearPixelIndex) + i;
+            break;
+        case SOBOL /* Sobol */:
+            /* seed depends on pixel */
+            seed = params.linearPixelIndex;
+            break;
+        case BLUE_NOISE /* Blue noise*/:
+            seed = params.linearPixelIndex;
+            break;
+        default:
+            break;
+        }
+        auto state = initSampler(params.pixelX, params.pixelY, params.linearPixelIndex, i, seed, params.samples_per_pixel,
+                                 (uint8_t)params.gen_type, i);
 
-        float x = random(state, params.dim[0], params.gen_type, params.scrambling);
-        float y = random(state, params.dim[1], params.gen_type, params.scrambling);
+        float x = random(state, params.dim[0], params.gen_type, params.scrambling, blueNoiseData.data(), 256);
+        float y = random(state, params.dim[1], params.gen_type, params.scrambling, blueNoiseData.data(), 256);
 
         csv << x << "," << y << ",\n";
     }
